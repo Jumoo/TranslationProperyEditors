@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jumoo.TranslationManager.NoneTranslatableText", "Jumoo.TranslationManager.NoneTranslatableText\Jumoo.TranslationManager.NoneTranslatableText.csproj", "{DF84545A-63BA-488D-930F-73DC66D651F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyEdior.Site", "PropertyEdior.Site\PropertyEdior.Site.csproj", "{D50EA48C-4BD7-45E0-81A6-8967D0E4C872}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF84545A-63BA-488D-930F-73DC66D651F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF84545A-63BA-488D-930F-73DC66D651F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF84545A-63BA-488D-930F-73DC66D651F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF84545A-63BA-488D-930F-73DC66D651F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D50EA48C-4BD7-45E0-81A6-8967D0E4C872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D50EA48C-4BD7-45E0-81A6-8967D0E4C872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D50EA48C-4BD7-45E0-81A6-8967D0E4C872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D50EA48C-4BD7-45E0-81A6-8967D0E4C872}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A7D24E7-6F29-46BC-9E32-1BC31FDC7658}
+	EndGlobalSection
+EndGlobal
