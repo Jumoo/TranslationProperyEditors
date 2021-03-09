@@ -11,3 +11,6 @@ Translation Manager won't pick them up as text to translate.
 This can be useful at any point where you have a deeply nested 
 text value that you don't want to send to translation. For example
 an api key within a grid or nested content element.
+
+N.B:
+ This is the Umbraco v8 version of this package v1.x is for Umbraco 7

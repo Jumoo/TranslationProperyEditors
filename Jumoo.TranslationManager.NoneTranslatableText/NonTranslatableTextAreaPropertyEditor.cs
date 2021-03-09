@@ -3,53 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Umbraco.Core;
+using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
+using Umbraco.Web.PropertyEditors;
 
 namespace Jumoo.TranslationManager.NoneTranslatableText
 {
-    [PropertyEditor("NonTranslatable.Textarea", "Non-Translatable Textarea", "~/umbraco/Views/propertyeditors/textarea/textarea.html",
-        Group = "common", ValueType = PropertyEditorValueTypes.Text, IsParameterEditor = true, Icon = "icon-application-window-alt color-grey")]
-    public class NonTranslatableTextAreaPropertyEditor : PropertyEditor
+    [DataEditor("NonTranslatable.Textarea", 
+        EditorType.PropertyValue | EditorType.MacroParameter,        
+        "Non-Translatable Textarea", 
+        "textarea",
+        ValueType = ValueTypes.Text,  
+        Group = "Common",
+        Icon = "icon-application-window-alt color-grey")]
+    public class NonTranslatableTextAreaPropertyEditor : DataEditor
     {
-        protected override PreValueEditor CreatePreValueEditor()
-        {
-            return new NonTranslatableTextAreaPreValueEditor();
-        }
-    }
+        public NonTranslatableTextAreaPropertyEditor(ILogger logger) 
+            : base(logger)
+        { }
 
-    public class NonTranslatableTextAreaPreValueEditor : PreValueEditor
-    {
-        [PreValueField("maxChars", "Maximum allowed characters", "number", Description = "If empty - no character limit")]
-        public int MaxChars { get; set; }
+        protected override IDataValueEditor CreateValueEditor()
+            => new TextOnlyValueEditor(Attribute);
 
-        [PreValueField("rows", "Number of rows", "number", Description = "If empty - 10 rows would be set as the default value")]
-        public int Rows { get; set; }
-    }
-
-
-    [PropertyValueType(typeof(string))]
-    [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
-    public class NonTranslatableTextAreaPropertyConverter : PropertyValueConverterBase
-    {
-        public override bool IsConverter(PublishedPropertyType propertyType)
-        {
-            return propertyType.PropertyEditorAlias.Equals("NonTranslatable.Textarea");
-        }
-
-        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return source;
-        }
-
-        public override object ConvertSourceToObject(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return source ?? string.Empty;
-        }
-
-        public override object ConvertSourceToXPath(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return source;
-        }
+        protected override IConfigurationEditor CreateConfigurationEditor()
+            => new TextboxConfigurationEditor();
     }
 }

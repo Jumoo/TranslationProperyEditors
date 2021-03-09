@@ -1,51 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Umbraco.Core.Models.PublishedContent;
+﻿
+using Umbraco.Core.Logging;
 using Umbraco.Core.PropertyEditors;
+using Umbraco.Web.PropertyEditors;
 
 namespace Jumoo.TranslationManager.NoneTranslatableText
 {
-    [PropertyEditor("NonTranslatable.Textbox", "Non-Translatable Textbox", "~/umbraco/Views/propertyeditors/textbox/textbox.html",
-        Group = "common", IsParameterEditor = true, Icon = "icon-autofill color-grey")]
-    public class NonTranslatableTextBoxPropertyEditor : PropertyEditor
+    [DataEditor("NonTranslatable.Textbox",
+        EditorType.PropertyValue | EditorType.MacroParameter,
+        "Non-Translatable Textbox",
+        "textbox",
+        ValueType = ValueTypes.Text,
+        Group = "Common",
+        Icon = "icon-application-window-alt color-grey")]
+    public class NonTranslatableTextBoxPropertyEditor : DataEditor
     {
-        protected override PreValueEditor CreatePreValueEditor()
-        {
-            return new NonTranslatableTextBoxPreValueEditor();
-        }
+        public NonTranslatableTextBoxPropertyEditor(ILogger logger)
+            : base(logger)
+        { }
+
+        protected override IDataValueEditor CreateValueEditor()
+            => new TextOnlyValueEditor(Attribute);
+
+        protected override IConfigurationEditor CreateConfigurationEditor()
+            => new TextboxConfigurationEditor();
     }
 
-    public class NonTranslatableTextBoxPreValueEditor : PreValueEditor
-    {
-        [PreValueField("maxChars", "Maximum allowed characters", "textstringlimited", Description = "If empty - 500 character limit")]
-        public bool MaxChars { get; set; }
-    }
-
-    [PropertyValueType(typeof(string))]
-    [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
-    public class NonTranslatableTextBoxPropertyConverter : PropertyValueConverterBase
-    {
-        public override bool IsConverter(PublishedPropertyType propertyType)
-        {
-            return propertyType.PropertyEditorAlias.Equals("NonTranslatable.Textbox");
-        }
-
-        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return source;
-        }
-
-        public override object ConvertSourceToObject(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return source ?? string.Empty;
-        }
-
-        public override object ConvertSourceToXPath(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return source;
-        }
-    }
 }
