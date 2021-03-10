@@ -8,6 +8,7 @@ using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
+using Umbraco.Core.PropertyEditors.ValueConverters;
 using Umbraco.Web.PropertyEditors;
 
 namespace Jumoo.TranslationManager.NoneTranslatableText
@@ -30,5 +31,33 @@ namespace Jumoo.TranslationManager.NoneTranslatableText
 
         protected override IConfigurationEditor CreateConfigurationEditor()
             => new TextboxConfigurationEditor();
+    }
+
+    public class NonTranslatableTextAreaValueConverter : PropertyValueConverterBase
+
+    {
+        private static readonly string[] PropertyTypeAliases =
+        {
+            "NonTranslatable.Textbox",
+            "NonTranslatable.Textarea"
+        };
+
+        public override bool IsConverter(IPublishedPropertyType propertyType)
+            => PropertyTypeAliases.Contains(propertyType.EditorAlias);
+
+        public override Type GetPropertyValueType(IPublishedPropertyType propertyType)
+            => typeof(string);
+
+        public override PropertyCacheLevel GetPropertyCacheLevel(IPublishedPropertyType propertyType)
+            => PropertyCacheLevel.Element;
+
+        public override object ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object source, bool preview)
+            => source;
+
+        public override object ConvertIntermediateToObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview)
+            => inter ?? string.Empty;
+
+        public override object ConvertIntermediateToXPath(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview)
+            => inter;
     }
 }

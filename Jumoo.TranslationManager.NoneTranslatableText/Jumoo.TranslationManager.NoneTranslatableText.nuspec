@@ -2,14 +2,15 @@
 <package >
   <metadata>
     <id>Jumoo.TranslationManager.NoneTranslatableText</id>
-    <version>8.0</version>
+    <version>8.1.4</version>
     <title>Translation Manager Non Translatable Text Editors</title>
     <authors>Kevin Jump</authors>
     <owners>Jumoo</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Non-translatable versions of Umbraco Textbox and TextArea</description>
     <releaseNotes><![CDATA[1.0 Initial Release
-8.0 Umbraco v8 release]]></releaseNotes>
+8.0 Umbraco v8 release
+8.1 Models builder support]]></releaseNotes>
   </metadata>
   <files>
     <file src="bin\release\Jumoo.TranslationManager.NoneTranslatableText.dll" target="lib\net472" />
